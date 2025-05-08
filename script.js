@@ -1,8 +1,9 @@
 const messageInput=document.querySelector(".message-input");
 const chatBody=document.querySelector(".chat-body");
 const sendMessageButton=document.querySelector("#send-message");
+const fileInput=document.querySelector("#file-input");
 
-const API_KEY=`Custome API Key`;
+const API_KEY=`API_KEY GOES HERE`; 
 const API_URL=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const userData={
@@ -16,7 +17,9 @@ const createMessageElement=(content, ...classes)=>{
     return div;
 };
 
-const generateBotResponse = async () => {
+const generateBotResponse = async (incomingMessageDiv) => {
+    const messageElement=incomingMessageDiv.querySelector(".message-text");
+
     const requestOptions={
         method:"POST",
         headers:{
@@ -33,10 +36,16 @@ const generateBotResponse = async () => {
         if(!response.ok){
             throw new Error(data.error.message);
         }
-        console.log(data);
+        const apiResponseText=data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+        messageElement.innerText=apiResponseText;
     }
     catch(error){
         console.log(error);
+        messageElement.innerText=error.message;
+        messageElement.style.color="#ff0000";
+}finally{
+    incomingMessageDiv.classList.remove("thinking");
+    chatBody.scrollTo({top: chatBody.scrollHeight, behavior: "smooth"});
 }
 };
 
@@ -50,6 +59,7 @@ const handleOutgoingMessage=(e)=>{
     const outgoingMessageDiv=createMessageElement(messageContent, "user-message");
     outgoingMessageDiv.querySelector(".message-text").textContent=userData.message;
     chatBody.appendChild(outgoingMessageDiv);
+    chatBody.scrollTo({top: chatBody.scrollHeight, behavior: "smooth"});
 
     setTimeout(()=>{
         const messageContent = `<svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
@@ -65,7 +75,8 @@ const handleOutgoingMessage=(e)=>{
     
         const incomingMessageDiv=createMessageElement(messageContent, "bot-message","thinking");
         chatBody.appendChild(incomingMessageDiv);
-        generateBotResponse();
+        chatBody.scrollTo({top: chatBody.scrollHeight, behavior: "smooth"});
+        generateBotResponse(incomingMessageDiv);
     }, 600);
 };
 
@@ -78,3 +89,4 @@ messageInput.addEventListener("keydown",(e)=>{
 });
 
 sendMessageButton.addEventListener("click",(e)=>handleOutgoingMessage(e));
+document.querySelector("#file-upload").addEventListener("click",()=>fileInput.click());
