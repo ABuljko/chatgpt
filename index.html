@@ -33,12 +33,17 @@
             <textarea placeholder="Message..." class="message-input" required></textarea>
             <div class="chat-controls">
                 <button type="button" class="material-symbols-rounded">
-                    <input type="file" id="file-upload" accept="image/*" hidden>
                     sentiment_satisfied
                     </button>
                     <div class="file-upload-wrapper">
+                        <input type="file" id="file-upload" accept="image/*" hidden>
+                        <img src="#">
                         <button type="button" id="file-upload" class="material-symbols-rounded">
                             attach_file
+                            </button>
+                            <button type="button" id="cancel-file" class="material-symbols-rounded">
+                                cancel
+                                </button> 
                     </div>
                         </button>
                         <button type="submit" id="send-message" class="material-symbols-rounded">
