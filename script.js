@@ -7,7 +7,7 @@ const fileCancelButton=document.querySelector("#file-cancel");
 const chatBotToggler=document.querySelector("#chatbot-toggler");
 const closeChatbot=document.querySelector("#close-chatbot");
 
-const API_KEY=`API_KEY GOES HERE`;   
+const API_KEY=`API_KEY`; // Replace with your actual API key 
 const API_URL=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const userData={
@@ -157,19 +157,19 @@ fileCancelButton.addEventListener("click", () => {
     imgElement.style.display = "none"; // Hide the image
 });
 
-const picker=new EmojijMart.Picker({
-    theme:"light",
-    skinTonePosition:"none",
-    previewPosition:"none",
-    onEmojijSelect:(emoji)=>{
-        const{selectionStart:start,selectionEnd:end}=messageInput;
+const picker = new EmojiMart.Picker({
+    theme: "light",
+    skinTonePosition: "none",
+    previewPosition: "none",
+    onEmojiSelect: (emoji) => {
+        const { selectionStart: start, selectionEnd: end } = messageInput;
         messageInput.setRangeText(emoji.native, start, end, "end");
         messageInput.focus();
     },
-    onclickOutside:(e)=>{
-        if(e.target.id=== "emoji-picker"){
+    onclickOutside: (e) => {
+        if (e.target.id === "emoji-picker") {
             document.body.classList.toggle("show-emoji-picker");
-        }else{
+        } else {
             document.body.classList.remove("show-emoji-picker");
         }
     },
