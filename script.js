@@ -70,6 +70,12 @@ const generateBotResponse = async (incomingMessageDiv) => {
         messageElement.style.color = "#ff0000";
     } finally {
         userData.file = {};
+        fileUploadWrapper.classList.remove("file-uploaded");
+        const imgElement = fileUploadWrapper.querySelector("img");
+        if (imgElement) {
+            imgElement.src = "";
+            imgElement.style.display = "none";
+        }
         incomingMessageDiv.classList.remove("thinking");
         chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
     }
@@ -110,11 +116,17 @@ const handleOutgoingMessage=(e)=>{
 };
 
 
-messageInput.addEventListener("keydown",(e)=>{
-    const userMessage=messageInput.value.trim();
-    if(e.key==="Enter" && userMessage && !e.shiftKey && window.innerWidth>768){ 
-        handleOutgoingMessage(e);
+messageInput.addEventListener("keydown", (e) => {
+    const userMessage = messageInput.value.trim();
+    if (e.key === "Enter" && !e.shiftKey) {
+        if (userMessage) {
+            e.preventDefault(); // Prevent new line
+            handleOutgoingMessage(e);
+        } else {
+            e.preventDefault(); // Prevent sending empty messages
+        }
     }
+    // Shift+Enter will insert a new line by default, so no need to handle it
 });
 
 messageInput.addEventListener("input",()=>{
@@ -153,8 +165,10 @@ fileCancelButton.addEventListener("click", () => {
     userData.file = {}; // Clear the file data
     fileUploadWrapper.classList.remove("file-uploaded"); // Remove the uploaded class
     const imgElement = fileUploadWrapper.querySelector("img");
-    imgElement.src = ""; // Clear the image source
-    imgElement.style.display = "none"; // Hide the image
+    if (imgElement) {
+        imgElement.src = ""; // Clear the image source
+        imgElement.style.display = "none"; // Hide the image
+    }
 });
 
 const picker = new EmojiMart.Picker({
