@@ -78,6 +78,9 @@ body.show-chatbot #chatbot-toggler span:last-child {
     box-shadow: 0 0 128px var(--chatbot-shadow),
                 0 32 -48px var(--chatbot-shadow-strong);
     transition: all 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* or your preferred height */
 }
 
 body.show-chatbot .chatbot-popup {
@@ -138,12 +141,13 @@ body.show-chatbot .chatbot-popup {
     padding: 25px 22px;
     display: flex;
     gap: 20px;
-    height: 460px;
-    margin-bottom: 82px;
+    flex: 1 1 auto;
     overflow-y: auto;
     flex-direction: column;
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-color) transparent;
+    margin-bottom: 0;
+    height: auto;
 }
 
 .chat-body .message {
@@ -238,12 +242,23 @@ body.show-chatbot .chatbot-popup {
     }
 }
 
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 8px;
+}
+
 .chat-footer {
-    position: absolute; 
+    position: relative;
     bottom: 0;
     width: 100%;
     background: var(--secondary-color);
     padding: 15px 22px 20px;
+    z-index: 2;
 }
 
 .chat-footer .chat-form {
@@ -351,7 +366,7 @@ body.show-chatbot .chatbot-popup {
     display: none;
 }
 
-chat-form .file-upload-wrapper.file-uploaded img,
+.chat-form .file-upload-wrapper.file-uploaded img,
 .chat-form .file-upload-wrapper.file-uploaded:hover #file-cancel {
     display: block;
 }

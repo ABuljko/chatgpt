@@ -132,8 +132,10 @@ messageInput.addEventListener("keydown", (e) => {
 messageInput.addEventListener("input",()=>{
     messageInput.style.height=`${initialInputHeight}px`;
     messageInput.style.height=`${messageInput.scrollHeight}px`;
-    document.querySelector("chat-form").style.borderRadius=messageInput.scrollHeight>
-    initialInputHeight ? "15px" : "32px";
+    const chatForm = document.querySelector(".chat-form");
+    if (chatForm) {
+        chatForm.style.borderRadius = messageInput.scrollHeight > initialInputHeight ? "15px" : "32px";
+    }
 });
 
 fileInput.addEventListener("change", (e) => {
@@ -162,13 +164,14 @@ fileInput.addEventListener("change", (e) => {
 });
 
 fileCancelButton.addEventListener("click", () => {
-    userData.file = {}; // Clear the file data
-    fileUploadWrapper.classList.remove("file-uploaded"); // Remove the uploaded class
+    userData.file = {};
+    fileUploadWrapper.classList.remove("file-uploaded");
     const imgElement = fileUploadWrapper.querySelector("img");
     if (imgElement) {
-        imgElement.src = ""; // Clear the image source
-        imgElement.style.display = "none"; // Hide the image
+        imgElement.src = "";
+        imgElement.style.display = "none";
     }
+    fileInput.value = ""; // Clear the file input
 });
 
 const picker = new EmojiMart.Picker({
