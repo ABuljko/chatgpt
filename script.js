@@ -165,17 +165,35 @@ const picker = new EmojiMart.Picker({
         const { selectionStart: start, selectionEnd: end } = messageInput;
         messageInput.setRangeText(emoji.native, start, end, "end");
         messageInput.focus();
-    },
-    onclickOutside: (e) => {
-        if (e.target.id === "emoji-picker") {
-            document.body.classList.toggle("show-emoji-picker");
-        } else {
-            document.body.classList.remove("show-emoji-picker");
-        }
-    },
+        document.body.classList.remove("show-emoji-picker");
+    }
 });
 
 document.querySelector(".chat-form").appendChild(picker);
+
+// Toggle emoji picker on button click
+const emojiPickerButton = document.getElementById("emoji-picker");
+emojiPickerButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.classList.toggle("show-emoji-picker");
+});
+
+// Hide emoji picker when clicking outside
+document.addEventListener("mousedown", (e) => {
+    const pickerEl = document.querySelector("em-emoji-picker");
+    if (!pickerEl) return;
+    if (
+        !pickerEl.contains(e.target) &&
+        e.target !== emojiPickerButton
+    ) {
+        document.body.classList.remove("show-emoji-picker");
+    }
+});
+
+// Hide emoji picker after emoji is selected
+picker.addEventListener("emoji-select", () => {
+    document.body.classList.remove("show-emoji-picker");
+});
 
 sendMessageButton.addEventListener("click",(e)=>handleOutgoingMessage(e));
 document.querySelector("#file-upload").addEventListener("click",()=>fileInput.click());

@@ -1,36 +1,43 @@
 # Chatbot Web App
 
-A modern chatbot web application with file upload and emoji support, powered by the Gemini API.
+A sleek, modern chatbot web application featuring file uploads, emoji support, and seamless integration with the Gemini API.
 
-## Features
+## ✨ Features
 
-- Responsive chatbot popup UI
-- Send and receive messages
-- Upload and preview image files
-- Emoji picker integration
-- Animated bot typing indicator
-- Stylish, dark-themed interface
+- **Responsive Popup UI:** Clean, mobile-friendly chat interface that pops up on demand.
+- **Real-Time Messaging:** Instantly send and receive messages.
+- **Image Upload & Preview:** Attach and preview image files directly in the chat.
+- **Emoji Picker:** Express yourself with a built-in emoji selector.
+- **Animated Typing Indicator:** See when the bot is responding.
+- **Dark Theme:** Stylish, eye-friendly design.
 
-## Usage
+## 🚀 Getting Started
 
-1. Open `index.html` in your browser.
-2. Click the chat icon to open the chatbot popup.
-3. Type your message, add emojis, or upload an image.
-4. Press Enter or click the send button to chat.
+1. **Clone or download** this repository.
+2. **Open** `index.html` in your browser.
+3. **Click** the chat icon to launch the chatbot popup.
+4. **Type** your message, add emojis, or upload an image.
+5. **Press Enter** or click the send button to chat.
 
-## Project Structure
+## 🗂️ Project Structure
 
-- [`index.html`](index.html): Main HTML file with chatbot UI
-- [`style.css`](style.css): Custom styles and layout
-- [`script.js`](script.js): Chatbot logic, API integration, and UI interactivity
+- [`index.html`](index.html): Main HTML file containing the chatbot UI.
+- [`style.css`](style.css): Custom styles and layout for the app.
+- [`script.js`](script.js): Chatbot logic, Gemini API integration, and UI interactivity.
 
-## Dependencies
+## 🛠️ Dependencies
 
-- [Google Gemini API](https://ai.google.dev/)
-- [Emoji Mart](https://github.com/missive/emoji-mart) (CDN)
+- [Google Gemini API](https://ai.google.dev/) — AI-powered chat responses.
+- [Emoji Mart](https://github.com/missive/emoji-mart) (CDN) — Emoji picker component.
 
-## Customization
+## 🔑 Configuration
 
-- **You must provide your own Gemini API key** to use the AI features.  
-  Update the API key in [`script.js`](script.js) with your personal key.
-- Modify styles in [`style.css`](style.css) to change the theme.
+- **Gemini API Key Required:**  
+  To enable AI features, insert your Gemini API key in [`script.js`](script.js):
+  ```js
+  // script.js
+  const GEMINI_API_KEY = 'YOUR_API_KEY_HERE';
+  ```
+- **Customize the Theme:**  
+  Edit [`style.css`](style.css) to personalize colors, fonts, and layout.
+
